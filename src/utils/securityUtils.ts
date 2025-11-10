@@ -16,7 +16,10 @@ export async function comparePassword(
   return await bcrypt.compare(password, hashedPassword);
 }
 
-export async function generateToken(payload: object): Promise<string> {
+export async function generateToken(payload: {
+  id: string;
+  email: string;
+}): Promise<string> {
   return new Promise((resolve, reject) => {
     jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" }, (err, token) => {
       if (err || !token) reject(err);
@@ -25,12 +28,18 @@ export async function generateToken(payload: object): Promise<string> {
   });
 }
 
-// 👇 Type-safe version (no `any`)
-export async function verifyToken(token: string): Promise<string | JwtPayload> {
-  return new Promise((resolve, reject) => {
+// 👇 Custom payload type
+export interface DecodedToken extends JwtPayload {
+  id: string;
+  email: string;
+}
+
+// 👇 Type-safe verifyToken
+export async function verifyToken(token: string): Promise<DecodedToken | null> {
+  return new Promise((resolve) => {
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
-      if (err) reject(err);
-      else resolve(decoded as string | JwtPayload);
+      if (err || typeof decoded === "string") return resolve(null);
+      resolve(decoded as DecodedToken);
     });
   });
 }

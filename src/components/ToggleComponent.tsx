@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { NavItem } from "./NavItem"; // assuming NavItem is in the same folder
+import { NavItem } from "./NavItem";
 
 export default function MobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
