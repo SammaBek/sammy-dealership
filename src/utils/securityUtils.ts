@@ -19,6 +19,7 @@ export async function comparePassword(
 export async function generateToken(payload: {
   id: string;
   email: string;
+  role: string;
 }): Promise<string> {
   return new Promise((resolve, reject) => {
     jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" }, (err, token) => {

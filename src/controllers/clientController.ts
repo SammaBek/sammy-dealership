@@ -24,6 +24,7 @@ export async function createClient(body: CreateClientDTO) {
     const token = await generateToken({
       id: newClient._id,
       email: newClient.email,
+      role: "client",
     });
 
     return { newClient, token };
@@ -51,6 +52,7 @@ export async function signInClient(body: SignInClientDTO) {
       const token = await generateToken({
         id: client._id,
         email: client.email,
+        role: "client",
       });
 
       return { client, token };
