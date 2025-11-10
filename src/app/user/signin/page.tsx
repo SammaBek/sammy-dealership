@@ -88,7 +88,7 @@ export default function Home() {
             href="/user/signup"
             className="text-sm text-gray-200 hover:underline mt-2"
           >
-            Don't have an account? Sign Up
+            {` Don't have an account? Sign Up`}
           </Link>
 
           <Link href="/" className="text-sm text-gray-200 hover:underline mt-2">

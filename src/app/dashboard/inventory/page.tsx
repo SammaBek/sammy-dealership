@@ -15,7 +15,7 @@ export default function InventoryPage() {
   return (
     <div className="p-6 flex flex-col h-screen ">
       <span className="sm:text-2xl font-semibold mb-4 font-serif text-gray-500 text-sm text-center">
-        Sammy's Dealership Inventory
+        {` Sammy's Dealership Inventory`}
       </span>
 
       {inventory.length === 0 ? (
