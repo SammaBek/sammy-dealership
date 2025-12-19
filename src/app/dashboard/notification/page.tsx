@@ -29,7 +29,7 @@ export default function NotificationPage() {
 
       {showNotification && (
         <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded">
-          Only lessthan 4 cars are currently available. Please add more cars to
+          Only less than 3 cars are currently available. Please add more cars to
           the inventory.
         </div>
       )}
