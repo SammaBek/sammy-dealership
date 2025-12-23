@@ -1,6 +1,7 @@
+"use client";
 import AddVehicle from "@/app/dashboard/vehicle/new/page";
 import { VehicleDTO } from "@/types/VehiclesDTO";
-import { act, useState } from "react";
+import { act, use, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { usePathname } from "next/navigation";

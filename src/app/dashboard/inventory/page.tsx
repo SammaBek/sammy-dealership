@@ -1,16 +1,16 @@
-"use client";
-import { use, useState, useEffect } from "react";
+
 import VehicleComponent from "@/components/VehicleComponent";
 import { VehicleDTO } from "@/types/VehiclesDTO";
-export default function InventoryPage() {
-  const [inventory, setInventory] = useState<VehicleDTO[]>([]);
 
-  useEffect(() => {
-    fetch("/api/cars")
-      .then((res) => res.json())
-      .then((data) => setInventory(data));
-  }, []);
+export default async function InventoryPage() {
 
+  // fetch inventory with revalidation/caching
+const res = await fetch(
+  `${process.env.NEXT_PUBLIC_BASE_URL}/api/cars`,
+  { next: { revalidate: 60 } }
+);
+  const inventory: VehicleDTO[] = await res.json();
+   
   console.log("Fetched Inventory Items:", inventory);
   return (
     <div className="p-6 flex flex-col h-screen ">
@@ -22,7 +22,7 @@ export default function InventoryPage() {
         <p>No inventory found.</p>
       ) : (
         <div className="grid grid-col sm:grid-cols-2 xl:grid-cols-3 gap-6 scroll-auto overflow-y-auto h-screen">
-          {inventory.map((item) => (
+          {inventory.map((item:VehicleDTO) => (
             <VehicleComponent key={item._id} {...item} />
           ))}
         </div>
